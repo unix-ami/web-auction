@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div>
+    <p class="d-flex justify-content-center fs-3 fw-bold mb-1">Log into your account</p>
+    <p class="d-flex justify-content-center small text-muted mb-4">Log in to access your account</p>
+</div>
+
+<div class="d-flex justify-content-center bg-body-secondary p-2 rounded">
+        <a href="{% url 'register' %}" class="btn w-50 rounded text-grey text-decoration-none">Sign up</a>
+        <a href="{% url 'login' %}" class="btn w-50 rounded btn-light text-black text-decoration-none">Log in</a>
+</div>
+
+<div>
+    <form class="d-flex flex-column w-100" method="POST">
+        {% csrf_token %}
+        <fieldset class="d-flex flex-column w-100">
+            <label for="{{form.username.id_for_label}}" class="small mb-1 mt-4">
+                {{form.username.label}}
+            </label>
+            {{form.username}}
+            <label for="{{form.password.id_for_label}}" class="small mb-1">
+                {{form.password.label}}
+            </label>
+            {{form.password}}
+        </fieldset>
+        <input class="btn btn-primary btn-block mt-3" type="submit" value="Login">
+    </form>
+</div>
+
+{% for message in messages %}
+    <p>{{message}}</p>
+{% endfor %}
+
+
+{% endblock %}

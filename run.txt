@@ -1,0 +1,39 @@
+terminal 1: 
+conda activate webauc
+pip install -r requirements.txt
+python3 manage.py migrate
+python3 manage.py runserver
+
+terminal 2: 
+cd frontend
+npm install
+npm run dev
+
+python3 manage.py createsuperuser
+
+npm run build
+./manage.py collectstatic
+
+python3 manage.py makemigrations
+python3 manage.py migrate
+python manage.py crontab add
+
+npm install pinia
+
+# Just run the command when needed
+python3 manage.py auction_win
+
+# Add crontab to run peridically 
+sudo python3 manage.py crontab add
+# Remove crontab
+sudo python3 manage.py crontab remove
+# View cron jobs
+ps aux | grep cron
+
+python3 manage.py auction_win --verbosity=2
+
+# Send test email
+python3 manage.py shell
+>>> from django.core.mail import send_mail
+>>> send_mail('Test', 'Test body', 'webprogramminggroup13@gmail.com', ['testemail@'])
+>>> exit() 
